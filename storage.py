@@ -46,7 +46,7 @@ def find_signal(ticker,trade_time,direction=None,max_minutes=20):
 
 def create_trade(wkn,asset,ticker,direction,trade_time,entry,stop,quantity,signal=None,verified=False,source='SYSTEM_SIGNAL',notes=''):
     tid=str(uuid.uuid4());entry=float(entry);quantity=float(quantity);c=connect();signal_id=signal.get('signal_id') if signal else None
-    c.execute('''INSERT INTO trades VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(tid,'OPEN',wkn.upper(),asset,ticker,direction,trade_time,None,entry,float(stop),None,quantity,entry*quantity,entry,entry,entry,None,notes,signal_id,1 if verified else 0,source));c.commit();c.close();return tid
+    c.execute('''INSERT INTO trades (id,status,wkn,asset,ticker,direction,entry_time,exit_time,certificate_entry,certificate_stop,certificate_exit,quantity,invested,highest_price,lowest_price,last_price,exit_reason,notes,signal_id,snapshot_verified,source) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(tid,'OPEN',wkn.upper(),asset,ticker,direction,trade_time,None,entry,float(stop),None,quantity,entry*quantity,entry,entry,entry,None,notes,signal_id,1 if verified else 0,source));c.commit();c.close();return tid
 
 def update_trade(tid,current,stop):
     c=connect();row=c.execute('SELECT * FROM trades WHERE id=?',(tid,)).fetchone();current=float(current)
