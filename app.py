@@ -7,7 +7,7 @@ from radar_style import prepare_radar,signal_label
 from storage import save_scan,find_signal,create_trade,update_trade,close_trade,delete_trade,correct_trade,load,learning_frame,journal_frame,backup,restore
 from position_manager import evaluate
 st.set_page_config(page_title='KO Market Radar V4.7',page_icon='📡',layout='wide')
-st.title('📡 KO Market Radar V4.7 · Signal Ledger')
+st.title('📡 KO Market Radar V4.7.2 · Signal Ledger')
 st.caption('Signal wird mit Uhrzeit eingefroren · Kaufzeit verknüpft den richtigen Snapshot · nur verifizierte Snapshots lernen')
 ASSETS=all_assets();LABELS=[f'{n} ({t})' for n,t,g in ASSETS];BY={f'{n} ({t})':(n,t) for n,t,g in ASSETS}
 def lab(ticker):return next((key for key,val in BY.items() if val[1]==ticker),LABELS[0])
